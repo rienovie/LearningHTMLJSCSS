@@ -1,4 +1,4 @@
-
+import * as util from "./util.js";
 
 //initialization
 const challengeDesc = new Map();
@@ -11,26 +11,26 @@ updateDesc();
 
 
 //submit overwrite
-god("mainForm").addEventListener("submit", function btnPressed(event) {
+util.god("mainForm").addEventListener("submit", function btnPressed(event) {
     event.preventDefault()
     clearOutput()
-    performAction(god("challengeSelector").value)
+    performAction(util.god("challengeSelector").value)
     selectInput()
     }
 )
 
 //main action call
 function performAction(action){
-    if (god("txtInput").value.trim() === "") {
+    if (util.god("txtInput").value.trim() === "") {
         printOutput("No input given")
         return
     }
 
-    printOutput("Challenge : " + god("challengeSelector").value)
-    printOutput("Input : " + god("txtInput").value)
+    printOutput("Challenge : " + util.god("challengeSelector").value)
+    printOutput("Input : " + util.god("txtInput").value)
 
     let finalOutput = ""
-    let input = god("txtInput").value
+    let input = util.god("txtInput").value
 
     switch (action){
         default:
@@ -50,29 +50,23 @@ function performAction(action){
     printOutput("Final : " + finalOutput)
 }
 
-//utility functions
-function god(elementId){
-    /* get on document */
-    return document.getElementById(elementId)
-}
-
 function printOutput(toPrint){
     const newItem = document.createElement("li")
     newItem.textContent = toPrint
-    god("outputList").appendChild(newItem)
+    util.god("outputList").appendChild(newItem)
 }
 
 function clearOutput(){
-    const ol = god("outputList")
+    const ol = util.god("outputList")
     while(ol.firstChild) ol.removeChild(ol.lastChild)
 }
 
 function selectInput(){
-   god("txtInput").select()
+   util.god("txtInput").select()
 }
 
 function updateDesc(){
-    god("desc").textContent = challengeDesc.get(god("challengeSelector").value)
+    util.god("desc").textContent = challengeDesc.get(util.god("challengeSelector").value)
 }
 
 function selectionChanged(){
